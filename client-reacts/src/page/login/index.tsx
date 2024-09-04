@@ -14,6 +14,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "@/App.css";
+import LoadingProcess from "@/components/demo/loading-process";
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -38,6 +39,7 @@ function Login({ onLogin }) {
         onLogin(data.username);
         toast.success("Login berhasil!");
       } else {
+        toast.error("gagal login!")
         console.error("Login failed");
       }
     } catch (error) {
@@ -53,27 +55,21 @@ function Login({ onLogin }) {
       {loading ? (
         <>
           <ToastContainer />
-          <div className="flex items-center justify-center h-screen">
-            <div className="lds-roller">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </div>
+          <LoadingProcess />
         </>
       ) : (
         <>
           <ToastContainer />
           <div className="flex items-center justify-center h-screen">
             <Card className="p-[70px] bg-gradient-to-r from-blue-300 to-blue-200">
+              <div className="flex text-center justify-center mb-10 ">
+                <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-white lg:text-5xl">
+                  Welcome to ChatApps!
+                </h1>
+              </div>
               <div className="flex space-x-4">
                 <div>
-                  <div className="flex pt-2 mr-8">
+                  <div className="flex pt-2 md:mr-5">
                     <img
                       src="../src/assets/login.png"
                       alt=""

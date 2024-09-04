@@ -3,6 +3,7 @@ import Login from "./page/login";
 import Content from "./page/main-content";
 
 import "@/App.css";
+import LoadingProcess from "@/components/demo/loading-process";
 function App() {
   const [username, setUsername] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,18 +24,7 @@ function App() {
     <>
       {loading ? (
         <>
-          <div className="flex items-center justify-center h-screen">
-            <div className="lds-roller">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </div>
+          <LoadingProcess />
         </>
       ) : (
         <>
