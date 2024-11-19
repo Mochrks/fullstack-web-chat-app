@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
-import io from "socket.io-client";
-import "@/App.css";
 import { Paperclip, SendHorizontal, CameraIcon } from "lucide-react";
 import { EmojiPicker } from "./emoji-picker";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
-const socket = io("http://localhost:5000");
+import { socket } from "@/utils/config";
+
+import "@/App.css";
 
 interface ChatListProps {
   username;
@@ -56,16 +56,14 @@ export default function ChatList({ username }: ChatListProps) {
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`flex flex-col gap-2 p-2 ${
-                msg.from === username ? "items-end" : "items-start"
-              }`}
+              className={`flex flex-col gap-2 p-2 ${msg.from === username ? "items-end" : "items-start"
+                }`}
             >
               <div
-                className={`p-2 rounded-md gap-2 ${
-                  msg.from === username
-                    ? "bg-orange-200 text-black"
-                    : "bg-green-200 text-black"
-                }`}
+                className={`p-2 rounded-md gap-2 ${msg.from === username
+                  ? "bg-orange-200 text-black"
+                  : "bg-green-200 text-black"
+                  }`}
               >
                 {msg.message}
                 <br />

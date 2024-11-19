@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import "@/App.css";
 import LoadingProcess from "@/components/demo/loading-process";
+import { loginUser } from "@/services/auth-service";
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -25,24 +26,16 @@ function Login({ onLogin }) {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-        credentials: "include",
-      });
+      const result = await loginUser(username, password);
 
-      if (response.ok) {
-        const data = await response.json();
-        onLogin(data.username);
+      if (result.success) {
+        onLogin(result.data.username);
         toast.success("Login berhasil!");
       } else {
-        toast.error("gagal login!")
-        console.error("Login failed");
+        toast.error(result.error || "Gagal login!");
       }
     } catch (error) {
+      toast.error("Terjadi kesalahan saat login");
       console.error("Login error:", error);
     } finally {
       setLoading(false);
