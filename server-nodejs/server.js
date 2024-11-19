@@ -21,6 +21,11 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 const users = {}; // In-memory user store
 const messages = {}; // Store messages by user
 
+const mockUsers = [
+  { username: "userA", password: bcrypt.hashSync("passwordA", 10) },
+  { username: "userB", password: bcrypt.hashSync("passwordB", 10) },
+];
+
 // Login endpoint
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
